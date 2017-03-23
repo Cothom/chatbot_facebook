@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   var data = req.body;
 
-  
+  console.log("debut post");
     // Make sure this is a page subscription
     if (data.object === 'page') {
 
@@ -28,14 +28,14 @@ router.post('/', function(req, res, next) {
           entry.messaging.forEach(function(event) {
           
             if (event.message) {
-              if (userservice.isUserKnown(event.sender.id)){
+              /*if (userservice.isUserKnown(event.sender.id)){*/
                 chatservice.receivedMessage(event);
-                } else {
-                    userService.addUser(event.sender.id, data);
+                /*} else {
+                    userService.addUser(event.sender.id, "coucou");
                     chatService.sendTextMessage(event.sender.id, "Bienvenue !"); 
                 }
             } else {
-              console.log("Webhook received unknown event: ", event);
+              console.log("Webhook received unknown event: ", event);*/
             }
           });
         });
