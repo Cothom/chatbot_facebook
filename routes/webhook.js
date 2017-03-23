@@ -43,6 +43,7 @@ router.post('/', function(req, res, next) {
           console.log("Webhook received unknown event: ", event);
         }
        
+      })
    }
    res.status(200).send();
 });
