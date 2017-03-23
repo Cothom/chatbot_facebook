@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
   var data = req.body;
 
-  if (userservice.isUserKnown(data.entry.id)){
+  if (userservice.isUserKnown(event.sender.id)){
     // Make sure this is a page subscription
     if (data.object === 'page') {
 
