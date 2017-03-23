@@ -35,15 +35,8 @@ router.post('/', function(req, res, next) {
         });
     }
    } else {
-        entry.messaging.forEach(function(event) {
-        if (event.message) {
-            userService.addUser(event.sender.id, data);
-            chatService.sendTextMessage(event.sender.id, "Bienvenue !");
-        } else {
-          console.log("Webhook received unknown event: ", event);
-        }
-       
-      })
+        userService.addUser(event.sender.id, data);
+        chatService.sendTextMessage(event.sender.id, "Bienvenue !");      
    }
    res.status(200).send();
 });
