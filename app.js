@@ -22,6 +22,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', homepage);
+app.use('/webhook', homepage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,6 +40,17 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+app.get('/webhook', function(req, res) {
+	if (req.query['hub.mode'] === 'subscribe' &&
+			req.query['hub.verify_token'] === 'dhqziIc0z4') {
+		console.log("Validating webhook");
+		res.status(200).send(req.query['hub.challenge']);
+	} else {
+		console.error("Failed validation. Make sure the validation tokens match.");
+		res.sendStatus(403);          
+	}  
 });
 
 module.exports = app;
