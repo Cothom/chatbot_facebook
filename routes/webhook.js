@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
       // Iterate over each messaging event
       entry.messaging.forEach(function(event) {
         if (event.message) {
-          receivedMessage(event);
+          chatservice.receivedMessage(event);
         } else {
           console.log("Webhook received unknown event: ", event);
         }
