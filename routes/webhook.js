@@ -28,14 +28,14 @@ router.post('/', function(req, res, next) {
           entry.messaging.forEach(function(event) {
           
             if (event.message) {
-              /*if (userservice.isUserKnown(event.sender.id)){*/
+              if (userservice.isUserKnown(event.sender.id)){
                 chatservice.receivedMessage(event);
-                /*} else {
+                } else {
                     userService.addUser(event.sender.id, "coucou");
                     chatService.sendTextMessage(event.sender.id, "Bienvenue !"); 
                 }
             } else {
-              console.log("Webhook received unknown event: ", event);*/
+              console.log("Webhook received unknown event: ", event);
             }
           });
         });
