@@ -35,10 +35,16 @@ router.post('/', function(req, res, next) {
         });
     }
    } else {
-       userService.addUser(data.entry.id, data);
-       chatService.sendTextMessage(data.entry.id, "Bienvenue !");
+        entry.messaging.forEach(function(event) {
+        if (event.message) {
+            userService.addUser(event.sender.id, data);
+            chatService.sendTextMessage(event.sender.id, "Bienvenue !");
+        } else {
+          console.log("Webhook received unknown event: ", event);
+        }
+       
    }
-   res.status(200).send(req.query['hub.challenge']);
+   res.status(200).send();
 });
 
 module.exports = router;
